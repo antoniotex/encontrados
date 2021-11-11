@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+      "target": "es2019", // Nosso target vai ser o EcmaScript 2019
+      "moduleResolution": "node", // Dizemos que o ambiente vai se o NodeJS
+      "module": "commonjs", //teste
+      "lib": ["es2019"], // Inclui todos os tipos do ecmaScript 2019
+      "sourceMap": true, // Quando compilar, vai deixar um mapa pra sabermos o tipo ao debuggar o app depois de compilar
+      "outDir": "dist", // Diretorio pra guardar o codigo compilado
+      "strict": true, // Ter sempre o strict mode
+      "noImplicitAny": true, // Nao deixar inferir automaticamente o Any quando nao houver um tipo
+      "strictNullChecks": true, // Nao vai deixar iniciar com null ou undefined
+      "strictFunctionTypes": true, // Define tipos de funcao stricts
+      "noImplicitThis": true, // Nao assumir automaticamente o this em uma funcao
+      "resolveJsonModule": true, 
+      "alwaysStrict": true,
+      "removeComments": true,
+      "noImplicitReturns": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": ".", // root do projeto
+      "paths": { // basicamente usado pra economizar ao digitar caminhos
+        "@src/*": ["./src/*"],
+        // "@test/*": ["./test/*"]
+      },
+      "rootDirs": [ // Configura os diretorios raiz
+        "./src",
+        // "./test"
+      ],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    },
+    "include": [
+      "./src/**/*.ts",
+      // "./test/**/*.ts"
+    ],
+    "exclude": [
+      "./node_modules/*",
+      "dist"
+    ]
+  }

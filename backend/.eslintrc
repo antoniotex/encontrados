@@ -1,0 +1,12 @@
+{
+    "root": true, // Vamos comecar do rootr
+    "parser": "@typescript-eslint/parser", // Faz o parser de TS para eslint
+    "plugins": [
+      "@typescript-eslint" // Para o eslint entender TS
+    ],
+    "extends": [
+      "eslint:recommended", // Usar as regras recomendadas do eslint
+      "plugin:@typescript-eslint/eslint-recommended", 
+      "plugin:@typescript-eslint/recommended"
+    ]
+  } 
