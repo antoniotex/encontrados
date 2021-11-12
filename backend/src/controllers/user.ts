@@ -1,6 +1,7 @@
 import { Controller, Post } from '@overnightjs/core';
 import { Response, Request } from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
 import { models } from '../database';
 
 async function getToken(params = {}) {
@@ -23,8 +24,35 @@ export class UserController {
       }
 
       const user = await models.User.create(req.body);
+      user.password = '';
 
       res.json({ user, token: await getToken() });
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+
+  @Post('authenticate')
+  public async Authenticate(req: Request, res: Response): Promise<void> {
+    const { email, password } = req.body;
+
+    try {
+      const user: any = await models.User.findOne({ where: { email } });
+
+      if (!user) {
+        res
+          .status(400)
+          .json({ error: 'Não encontramos cadastro com estes dados' });
+        return;
+      }
+
+      if (!(await bcrypt.compare(password, user.password))) {
+        res.status(400).json({ error: 'Usuário ou senha incorretos' });
+        return;
+      }
+
+      user.password = undefined;
+      res.json({ user, token: await getToken({ id: user.id }) });
     } catch (error) {
       res.status(400).send({ error: error });
     }
