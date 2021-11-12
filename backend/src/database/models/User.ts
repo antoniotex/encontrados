@@ -13,50 +13,52 @@ interface User extends Model {
 }
 
 type UserStatic = typeof Model & {
-  new (values?: Partial<User>, options?: BuildOptions): User
-}
+  new (values?: Partial<User>, options?: BuildOptions): User;
+};
 
-export function build(sequelize: Sequelize){
-  const User = sequelize.define('user', {
+export function build(sequelize: Sequelize) {
+  const User = sequelize.define(
+    'user',
+    {
       id: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: { len: [5, 100] }
+        validate: { len: [5, 100] },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: { len: [5, 100], isEmail: true }
+        validate: { len: [5, 100], isEmail: true },
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       password_reset_token: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       password_reset_expires: {
         type: DataTypes.DATE,
-        allowNull: false
-      }
-  }, {
-    hooks: {
-        beforeSave: async (user: User, options) => {
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            user.password = hashedPassword;
-        }
+      },
     },
-    timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  }) as UserStatic;
+    {
+      hooks: {
+        beforeSave: async (user: User) => {
+          const hashedPassword = await bcrypt.hash(user.password, 10);
+          user.password = hashedPassword;
+        },
+      },
+      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    }
+  ) as UserStatic;
   return User;
 }

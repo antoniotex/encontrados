@@ -1,3 +1,4 @@
+import { UserController } from './controllers/user';
 import './util/module-alias';
 import { Server } from '@overnightjs/core';
 import bodyParser from 'body-parser';
@@ -21,7 +22,8 @@ export class SetupServer extends Server {
 
   private setupControllers(): void {
     const noticeController = new NoticeController();
-    this.addControllers([noticeController]);
+    const userController = new UserController();
+    this.addControllers([noticeController, userController]);
   }
 
   public getApp(): Application {
