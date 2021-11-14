@@ -1,9 +1,9 @@
-import { UserController } from './controllers/user';
 import './util/module-alias';
 import { Server } from '@overnightjs/core';
 import bodyParser from 'body-parser';
 import { Application } from 'express';
-import { NoticeController } from './controllers/notice';
+import { UserController } from './controllers/user';
+import { PostController } from './controllers/post';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -21,9 +21,9 @@ export class SetupServer extends Server {
   }
 
   private setupControllers(): void {
-    const noticeController = new NoticeController();
+    const postController = new PostController();
     const userController = new UserController();
-    this.addControllers([noticeController, userController]);
+    this.addControllers([postController, userController]);
   }
 
   public getApp(): Application {

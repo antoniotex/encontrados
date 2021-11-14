@@ -1,5 +1,3 @@
-'use strict';
-
 import { DataTypes, QueryInterface, UUIDV4 } from 'sequelize';
 
 export const up = async (q: QueryInterface) => {

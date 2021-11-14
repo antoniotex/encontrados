@@ -1,5 +1,6 @@
-import { Model, UUIDV4, Sequelize, DataTypes, BuildOptions } from 'sequelize';
+import { Model, UUIDV4, Sequelize, DataTypes } from 'sequelize';
 import * as bcrypt from 'bcryptjs';
+import { SequelizeStaticType } from '..';
 
 interface User extends Model {
   readonly id: string;
@@ -12,9 +13,7 @@ interface User extends Model {
   updated_at: Date;
 }
 
-type UserStatic = typeof Model & {
-  new (values?: Partial<User>, options?: BuildOptions): User;
-};
+export type UserStatic = SequelizeStaticType<User>;
 
 export function build(sequelize: Sequelize) {
   const User = sequelize.define(
@@ -60,5 +59,13 @@ export function build(sequelize: Sequelize) {
       updatedAt: 'updated_at',
     }
   ) as UserStatic;
+
+  User.associate = (models) => {
+    User.hasMany(models.Post, {
+      foreignKey: 'user_id',
+      as: 'posts',
+      onDelete: 'CASCADE',
+    });
+  };
   return User;
 }
