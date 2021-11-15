@@ -9,6 +9,7 @@ import {
 import { models } from '@src/database';
 import { Response, Request } from 'express';
 import auth from '@src/middlewares/auth';
+import { Op } from 'sequelize';
 
 @Controller('api/posts')
 export class PostController {
@@ -21,6 +22,39 @@ export class PostController {
         ],
       });
       res.status(200).json(posts);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  }
+
+  @Get('search')
+  public async search(req: Request, res: Response): Promise<void> {
+    const { query } = req.query;
+
+    if (!query) {
+      res.status(200).send([]);
+    }
+
+    const arrQuery = [];
+    for (let i = 0; i < (query as string).split(' ').length; i++) {
+      arrQuery.push({
+        [Op.or]: [
+          { title: { [Op.substring]: (query as string).split(' ')[i] } },
+          { description: { [Op.substring]: (query as string).split(' ')[i] } },
+        ],
+      });
+    }
+    try {
+      const posters = await models.Post.findAll({
+        where: {
+          [Op.and]: arrQuery,
+        },
+        order: [['id', 'DESC']],
+        include: [
+          { model: models.User, as: 'user', attributes: ['id', 'name'] },
+        ],
+      });
+      res.status(200).json(posters);
     } catch (error) {
       res.status(400).json(error);
     }
@@ -42,6 +76,7 @@ export class PostController {
   }
 
   @Get('user/:user_id')
+  @Middleware(auth)
   public async getByUser(req: Request, res: Response): Promise<void> {
     const { user_id } = req.params;
     try {
