@@ -28,8 +28,14 @@ export class PostController {
   public async getAll(req: Request, res: Response): Promise<void> {
     try {
       const posts = await models.Post.findAll({
+        attributes: { exclude: ['category_id', 'user_id'] },
         include: [
           { model: models.User, as: 'user', attributes: ['id', 'name'] },
+          {
+            model: models.Category,
+            as: 'category',
+            attributes: ['id', 'description'],
+          },
         ],
       });
       res.status(200).json(posts);
@@ -68,12 +74,18 @@ export class PostController {
     }
     try {
       const posters = await models.Post.findAll({
+        attributes: { exclude: ['category_id', 'user_id'] },
         where: {
           [Op.and]: arrQuery,
         },
         order: [['id', 'DESC']],
         include: [
           { model: models.User, as: 'user', attributes: ['id', 'name'] },
+          {
+            model: models.Category,
+            as: 'category',
+            attributes: ['id', 'description'],
+          },
         ],
       });
       res.status(200).json(posters);
@@ -98,8 +110,14 @@ export class PostController {
     const { id } = req.params;
     try {
       const post = await models.Post.findByPk(id, {
+        attributes: { exclude: ['category_id', 'user_id'] },
         include: [
           { model: models.User, as: 'user', attributes: ['id', 'name'] },
+          {
+            model: models.Category,
+            as: 'category',
+            attributes: ['id', 'description'],
+          },
         ],
       });
       res.status(200).json(post);
@@ -130,11 +148,17 @@ export class PostController {
         return;
       }
       const post = await models.Post.findAll({
+        attributes: { exclude: ['category_id', 'user_id'] },
         where: {
           user_id,
         },
         include: [
           { model: models.User, as: 'user', attributes: ['id', 'name'] },
+          {
+            model: models.Category,
+            as: 'category',
+            attributes: ['id', 'description'],
+          },
         ],
       });
 
@@ -158,7 +182,14 @@ export class PostController {
   @Post('')
   @Middleware(auth)
   public async store(req: Request, res: Response): Promise<void> {
+    const { user_id } = req.body;
     try {
+      const user = await models.User.findByPk(user_id);
+      console.log(user);
+      if (!user) {
+        res.status(400).send({ msg: 'Usuário não encontrado' });
+        return;
+      }
       const newPost = await models.Post.create(req.body);
       res.status(200).json(newPost);
     } catch (error) {
