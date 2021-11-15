@@ -1,3 +1,4 @@
+import { CategoryController } from './controllers/caterory';
 import './util/module-alias';
 import { Server } from '@overnightjs/core';
 import bodyParser from 'body-parser';
@@ -30,7 +31,8 @@ export class SetupServer extends Server {
   private setupControllers(): void {
     const postController = new PostController();
     const userController = new UserController();
-    this.addControllers([postController, userController]);
+    const categoryController = new CategoryController();
+    this.addControllers([postController, userController, categoryController]);
   }
 
   public getApp(): Application {
