@@ -5,8 +5,6 @@ import 'dotenv/config';
 export default (req: any, res: any, next: any) => {
   const authHeader = req.headers.authorization;
 
-  console.log('passei por aqui');
-
   if (!authHeader) {
     return res.status(401).send({ error: 'O token não foi informado' });
   }
