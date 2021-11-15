@@ -9,24 +9,28 @@ export class PostController {
   public async getAll(req: Request, res: Response): Promise<void> {
     try {
       const posts = await models.Post.findAll({
-        include: [{ model: models.User, as: 'user', attributes: ['id', 'name'] }],
+        include: [
+          { model: models.User, as: 'user', attributes: ['id', 'name'] },
+        ],
       });
       res.status(200).json(posts);
     } catch (error) {
-      res.status(400).json(error)
+      res.status(400).json(error);
     }
   }
 
   @Get(':id')
   public async getById(req: Request, res: Response): Promise<void> {
-    const { id } = req.params
+    const { id } = req.params;
     try {
       const post = await models.Post.findByPk(id, {
-        include: [{ model: models.User, as: 'user', attributes: ['id', 'name'] }],
-      })
+        include: [
+          { model: models.User, as: 'user', attributes: ['id', 'name'] },
+        ],
+      });
       res.status(200).json(post);
     } catch (error) {
-      res.status(400).json(error)
+      res.status(400).json(error);
     }
   }
 
