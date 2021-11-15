@@ -13,6 +13,17 @@ import { Op } from 'sequelize';
 
 @Controller('api/posts')
 export class PostController {
+  /**
+   * @swagger
+   * /api/posts:
+   *  get:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Get('')
   public async getAll(req: Request, res: Response): Promise<void> {
     try {
@@ -27,6 +38,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts/search:
+   *  get:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Get('search')
   public async search(req: Request, res: Response): Promise<void> {
     const { query } = req.query;
@@ -60,6 +82,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts/:id:
+   *  get:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Get(':id')
   public async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
@@ -75,6 +108,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts/:user_id:
+   *  get:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Get('user/:user_id')
   @Middleware(auth)
   public async getByUser(req: Request, res: Response): Promise<void> {
@@ -100,6 +144,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts:
+   *  post:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Post('')
   @Middleware(auth)
   public async store(req: Request, res: Response): Promise<void> {
@@ -111,6 +166,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts/:id:
+   *  put:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Put(':id')
   @Middleware(auth)
   public async update(req: Request, res: Response): Promise<void> {
@@ -130,6 +196,17 @@ export class PostController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/posts:id:
+   *  delete:
+   *      tags:
+   *          - post
+   *      produces:
+   *          - application/json
+   *      parameters:
+   *      responses:
+   */
   @Delete(':id')
   @Middleware(auth)
   public async delete(req: Request, res: Response): Promise<void> {

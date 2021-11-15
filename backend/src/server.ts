@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import { Application } from 'express';
 import { UserController } from './controllers/user';
 import { PostController } from './controllers/post';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDocs } from './util/swaggerDocs';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -18,6 +20,11 @@ export class SetupServer extends Server {
   private setupExpress(): void {
     // Esse app vem do server que to extendendo
     this.app.use(bodyParser.json());
+    this.app.use(
+      '/swagger',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocs, { explorer: true })
+    );
   }
 
   private setupControllers(): void {
