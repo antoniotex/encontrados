@@ -47,6 +47,7 @@ export function build(sequelize: Sequelize) {
       foreignKey: 'category_id',
       as: 'category',
     });
+    Post.hasMany(models.Image, { foreignKey: 'post_id', as: 'images' });
   };
   return Post;
 }

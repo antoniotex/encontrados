@@ -36,11 +36,12 @@ export class PostController {
             as: 'category',
             attributes: ['id', 'description'],
           },
+          { association: 'images' },
         ],
       });
       res.status(200).json(posts);
     } catch (error) {
-      res.status(400).json(error);
+      res.status(400).json({ error, msg: 'Erro ao obter posts' });
     }
   }
 
@@ -86,6 +87,7 @@ export class PostController {
             as: 'category',
             attributes: ['id', 'description'],
           },
+          { association: 'images' },
         ],
       });
       res.status(200).json(posters);
@@ -118,6 +120,7 @@ export class PostController {
             as: 'category',
             attributes: ['id', 'description'],
           },
+          { association: 'images' },
         ],
       });
       res.status(200).json(post);
@@ -159,6 +162,7 @@ export class PostController {
             as: 'category',
             attributes: ['id', 'description'],
           },
+          { association: 'images' },
         ],
       });
 

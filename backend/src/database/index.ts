@@ -4,6 +4,7 @@ import * as config from './config';
 import * as User from './models/User';
 import * as Post from './models/Post';
 import * as Category from './models/Category';
+import * as Image from './models/Image';
 
 import 'dotenv/config';
 
@@ -27,6 +28,7 @@ function buildModel(seq: Sequelize) {
     User: User.build(seq),
     Post: Post.build(seq),
     Category: Category.build(seq),
+    Image: Image.build(seq),
   };
   Object.keys(models).forEach((key) => {
     const modelKey = key as keyof typeof models;
