@@ -225,7 +225,7 @@ export class PostController {
    *      responses:
    */
   @Put(':id')
-  @Middleware(auth)
+  @Middleware([auth, uploadS3.array('images', 6)])
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
@@ -237,9 +237,20 @@ export class PostController {
       }
       post.update(req.body);
 
+      const images = ((await req?.files) as Array<any>)?.map((image: any) => {
+        return {
+          location: image.location,
+          post_id: post.id,
+        };
+      });
+
+      if (images.length > 0) {
+        await models.Image.bulkCreate(images);
+      }
+
       res.status(200).json({ post, msg: 'Post atualizado com sucesso' });
     } catch (error) {
-      res.status(400).json(error);
+      res.status(400).json({ error, msg: 'Ocorreu um erro ao atualizar post' });
     }
   }
 
