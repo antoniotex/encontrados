@@ -10,6 +10,7 @@ import { models } from '@src/database';
 import { Response, Request } from 'express';
 import auth from '@src/middlewares/auth';
 import { Op } from 'sequelize';
+import uploadS3 from '../middlewares/uploadS3';
 
 @Controller('api/posts')
 export class PostController {
@@ -184,17 +185,28 @@ export class PostController {
    *      responses:
    */
   @Post('')
-  @Middleware(auth)
+  @Middleware([auth, uploadS3.array('images', 6)])
   public async store(req: Request, res: Response): Promise<void> {
     const { user_id } = req.body;
     try {
       const user = await models.User.findByPk(user_id);
-      console.log(user);
       if (!user) {
         res.status(400).send({ msg: 'Usuário não encontrado' });
         return;
       }
       const newPost = await models.Post.create(req.body);
+
+      const images = ((await req?.files) as Array<any>)?.map((image: any) => {
+        return {
+          location: image.location,
+          post_id: newPost.id,
+        };
+      });
+
+      if (images.length > 0) {
+        await models.Image.bulkCreate(images);
+      }
+
       res.status(200).json(newPost);
     } catch (error) {
       res.status(400).json(error);
