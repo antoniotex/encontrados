@@ -1,3 +1,4 @@
+import { isAuthenticated, logout } from './../store/auth/token.service';
 import axios from 'axios';
 import { TOKEN_KEY } from '../store/auth/token.service';
 
@@ -12,6 +13,15 @@ api.interceptors.request.use(async (config: any) => {
     }
     return config;
 });
+
+api.interceptors.response.use(async (response: any) => {
+    return response;
+  }, function (error) {
+    if(error.response.status === 401 || !isAuthenticated()){
+        logout()
+    }
+    return Promise.reject(error);
+  });
 
 export default api
 

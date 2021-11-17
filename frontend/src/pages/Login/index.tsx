@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { asyncLogin } from '../../store/auth/auth.actions'
 import { Container, Description, ForgotLink, Input, LoginButton, Title } from './styles'
 import { isAuthenticated, login } from '../../store/auth/token.service';
@@ -12,7 +12,9 @@ const Login: React.FC = () => {
 
     const handleLogin = async () => {
         const response = await asyncLogin({email,password})
-        login(response?.data.token)
+        if(response?.data.token){
+            login(response?.data.token)
+        }
         if(isAuthenticated()){
             history.push('/')
         }

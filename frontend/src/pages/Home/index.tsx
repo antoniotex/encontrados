@@ -1,4 +1,3 @@
-import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { isAuthenticated, logout } from '../../store/auth/token.service'
 

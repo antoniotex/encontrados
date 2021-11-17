@@ -1,7 +1,5 @@
 import { Dispatch } from "redux"
 import encontradosAPI from "../../services/encontradosAPI";
-import { updateLogin } from "./auth.store";
-import { login } from "./token.service";
 
 export const asyncGetAllPosts = () => {
     return (dispatch: Dispatch) => {
