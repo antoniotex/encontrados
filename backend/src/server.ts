@@ -7,6 +7,7 @@ import { UserController } from './controllers/user';
 import { PostController } from './controllers/post';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './util/swaggerDocs';
+import cors from 'cors';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -26,6 +27,7 @@ export class SetupServer extends Server {
       swaggerUi.serve,
       swaggerUi.setup(swaggerDocs, { explorer: true })
     );
+    this.app.use(cors())
   }
 
   private setupControllers(): void {
