@@ -1,9 +1,14 @@
-import React from 'react'
+import { Provider } from 'react-redux'
+import Routes from './pages/routes'
+import store from './store'
 
 const App = () => {
   return (
     <div>
-      App works!!
+
+    <Provider store={store}>
+      <Routes />
+    </Provider>
     </div>
   )
 }

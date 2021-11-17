@@ -42,19 +42,19 @@ export class UserController {
       if (!user) {
         res
           .status(400)
-          .json({ error: 'Não encontramos cadastro com estes dados' });
+          .send({ msg: 'Não encontramos cadastro com estes dados' });
         return;
       }
 
       if (!(await bcrypt.compare(password, user.password))) {
-        res.status(400).json({ error: 'Usuário ou senha incorretos' });
+        res.status(400).send({ msg: 'Usuário ou senha incorretos' });
         return;
       }
 
       user.password = undefined;
       res.json({ user, token: await getToken({ id: user.id }) });
     } catch (error) {
-      res.status(400).send({ error: error });
+      res.status(400).send({ error: error, msg: 'Erro ao fazer login' });
     }
   }
 }
