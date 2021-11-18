@@ -1,24 +1,25 @@
 import { useState } from 'react'
 import { Button, Modal, Stack } from 'react-bootstrap';
-import { asyncLogin } from '../../store/auth/auth.actions';
+import { asyncRegister } from '../../store/auth/auth.actions';
 import { isAuthenticated, login } from '../../store/auth/token.service';
 import DefaultInput from '../DefaultInput';
 import { Content, Logo, Title } from './styles';
 
-const LoginModal = (props: any) => {
-    const [formLogin, setFormLogin] = useState({
+const RegisterModal = (props: any) => {
+    const [formRegister, setFormRegister] = useState({
         email: '',
-        password: ''
+        password: '',
+        name: ''
     })
 
     const handleChange = (e: any) => {
         const value = e.target.value;
-        const arr = { ...formLogin, [e.target.name]: value }
-        setFormLogin(arr)
+        const arr = { ...formRegister, [e.target.name]: value }
+        setFormRegister(arr)
     }
 
-    const handleLogin = async () => {
-        const response = await asyncLogin(formLogin)
+    const handleRegister = async () => {
+        const response = await asyncRegister(formRegister)
         if(response?.data.token){
             login(response?.data.token)
         }
@@ -36,12 +37,20 @@ const LoginModal = (props: any) => {
         >
             <Content>
                 <Logo>Encontrados</Logo>
-                <Title>Faça login para continuar</Title>
+                <Title>Registre-se</Title>
                 <Stack gap={3}>
+                    <DefaultInput
+                        label="Nome Completo"
+                        placeholder="Digite se nome"
+                        value={formRegister.name}
+                        name="name"
+                        onChange={handleChange}
+                        type="text"
+                    />
                     <DefaultInput
                         label="E-mail"
                         placeholder="Digite se e-mail"
-                        value={formLogin.email}
+                        value={formRegister.email}
                         name="email"
                         onChange={handleChange}
                         type="email"
@@ -49,13 +58,13 @@ const LoginModal = (props: any) => {
                     <DefaultInput
                         label="Senha"
                         placeholder="Digite sua senha"
-                        value={formLogin.password}
+                        value={formRegister.password}
                         name="password"
                         onChange={handleChange}
                         type="password"
                     />
-                    <Button onClick={handleLogin} className="mb-3" variant="primary" size="lg">
-                        Entrar
+                    <Button onClick={handleRegister} className="mb-3" variant="primary" size="lg">
+                        Cadastrar
                     </Button>
                 </Stack>
             </Content>
@@ -63,4 +72,4 @@ const LoginModal = (props: any) => {
       );
 }
 
-export default LoginModal
+export default RegisterModal

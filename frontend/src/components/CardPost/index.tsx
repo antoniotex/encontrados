@@ -7,7 +7,6 @@ interface CardPostProps {
 }
 
 const CardPost: React.FC<CardPostProps> = ({ post }) => {
-    console.log('POST:: ', post.id)
     return (
         <Container>
             <CardBody>

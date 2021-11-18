@@ -1,18 +1,23 @@
 import { isAuthenticated } from "../../store/auth/token.service"
-import { Brand, Container, LoginButton } from "./styles"
+import { Brand, Container, HeaderMenu, LoginButton } from "./styles"
 
 interface HeaderProps {
     toggleLoginModal: () => void;
-    handleLogout: () => void;
+    toggleRegisterModal: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleLoginModal, handleLogout }) => {
+const Header: React.FC<HeaderProps> = ({ toggleLoginModal, toggleRegisterModal }) => {
     return (
         <Container>
             <Brand>Encontrados</Brand>
-            <LoginButton onClick={toggleLoginModal}>
-                { isAuthenticated() ? 'Sair' : 'Entrar' }
-            </LoginButton>
+            <HeaderMenu>
+                <LoginButton onClick={toggleLoginModal}>
+                    { isAuthenticated() ? 'Sair' : 'Entrar' }
+                </LoginButton>
+                { !isAuthenticated() && <LoginButton onClick={toggleRegisterModal}>
+                    Registre-se
+                </LoginButton> }
+            </HeaderMenu>
         </Container>
     )
 }

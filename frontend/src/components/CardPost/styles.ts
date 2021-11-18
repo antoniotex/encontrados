@@ -34,6 +34,7 @@ export const Info = styled.div`
 export const Title = styled.h2`
     font-size: 18px;
     margin: 5px;
+    padding-bottom: 15px;
 `
 
 export const DatePost = styled.h2`

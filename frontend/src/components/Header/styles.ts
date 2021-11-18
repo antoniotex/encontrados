@@ -21,4 +21,8 @@ export const Brand = styled.span`
 export const LoginButton = styled.a`
     /* color: #fff; */
     text-decoration: none;
+    margin: 0 10px;
+`
+
+export const HeaderMenu = styled.div`
 `

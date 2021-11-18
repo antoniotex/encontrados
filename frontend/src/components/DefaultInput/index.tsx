@@ -12,7 +12,7 @@ interface DefaultInputProps {
 
 const DefaultInput: React.FC<DefaultInputProps> = ({ value, label, onChange, placeholder, type, name }) => {
     return (
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
             <Form.Label>{label}</Form.Label>
             <Form.Control name={name} onChange={onChange} type={type} placeholder={placeholder} />
         </Form.Group>
