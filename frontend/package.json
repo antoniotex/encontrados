@@ -2,7 +2,7 @@
   "name": "encontrados",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:3333",
+  "proxy": "http://localhost:3333",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
@@ -15,6 +15,7 @@
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
     "firebase": "^9.4.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",

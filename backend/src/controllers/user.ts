@@ -19,7 +19,7 @@ export class UserController {
       if (await models.User.findOne({ where: { email } })) {
         res
           .status(400)
-          .send({ error: 'Já existe um cadastro com este e-mail' });
+          .send({ msg: 'Já existe um cadastro com este e-mail' });
         return;
       }
 

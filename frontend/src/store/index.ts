@@ -2,10 +2,12 @@ import { configureStore, Action, ThunkAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import authReducer from './auth/auth.store';
+import postReducer from './post/post.store';
 
 const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    post: postReducer
   },
 });
 

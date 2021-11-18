@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './Home';
-import Login from './Login';
 import { isAuthenticated } from '../store/auth/token.service'
 
 const PrivateRoute = ({ component: Component, route, ...rest }: any) => {
@@ -11,7 +10,6 @@ const PrivateRoute = ({ component: Component, route, ...rest }: any) => {
         isAuthenticated() ? (
           <Component {...props} />
         ) : (
-          // Redireciona pra home e passa o estado para o app nao ficar perdido
           <Redirect
             to={{ pathname: "/login", state: { from: props.location } }}
           />
@@ -24,8 +22,8 @@ const PrivateRoute = ({ component: Component, route, ...rest }: any) => {
 const Routes = () => (
   <Router>
     <Switch>
-      <PrivateRoute exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/" component={Home} />
+      <PrivateRoute exact path="/noworjs" component={<div></div>} />
     </Switch>
   </Router>
 );

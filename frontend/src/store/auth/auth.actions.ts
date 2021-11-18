@@ -21,3 +21,14 @@ export const asyncLogin = async (data: any) => {
         
     }
 }
+
+export const asyncRegister = async (data: any) => {
+    try {
+        const response = await encontradosAPI.post('/users/register', data)
+        return response
+    } catch (error: any) {
+        console.log('ERROR: ', error.response.data)
+        alert(error.response.data.msg)
+        
+    }
+}
