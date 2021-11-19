@@ -35,6 +35,10 @@ const Home = () => {
 
     const { posts } = useSelector((state: RootState) => state.post)
 
+    const handleClick = (id: number) => {
+        history.push(`/post/${id}`)
+    }
+
     return (
         <Content>
             <Header toggleLoginModal={toggleLoginModal} toggleRegisterModal={toggleRegisterModal}  />
@@ -48,13 +52,7 @@ const Home = () => {
             />
             <Container>
                 { posts.map(post => (            
-                    <CardPost key={post.id} post={post} />
-                )) }
-                { posts.map(post => (            
-                    <CardPost key={post.id} post={post} />
-                )) }
-                { posts.map(post => (            
-                    <CardPost key={post.id} post={post} />
+                    <CardPost onClick={handleClick} key={post.id} post={post} />
                 )) }
             </Container>
         </Content>

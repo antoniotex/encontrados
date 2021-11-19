@@ -19,9 +19,10 @@ export const Brand = styled.span`
 `
 
 export const LoginButton = styled.a`
-    /* color: #fff; */
+    color: #000;
     text-decoration: none;
     margin: 0 10px;
+    cursor: pointer;
 `
 
 export const HeaderMenu = styled.div`
