@@ -30,7 +30,8 @@ export interface Post {
 }
 
 interface postProps {
-  posts: Post[]
+  posts: Post[];
+  post?: Post;
 }
 
 const initialState: postProps = {
@@ -44,8 +45,11 @@ const post = createSlice({
     updatePosts(state, action) {
       state.posts = action.payload;
     },
+    updatePost(state, action) {
+      state.post = action.payload;
+    },
   },
 });
 
-export const { updatePosts } = post.actions;
+export const { updatePosts, updatePost } = post.actions;
 export default post.reducer;

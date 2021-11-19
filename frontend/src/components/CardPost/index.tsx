@@ -4,11 +4,12 @@ import moment from 'moment'
 
 interface CardPostProps {
     post: Post;
+    onClick: (id: number) => void
 }
 
-const CardPost: React.FC<CardPostProps> = ({ post }) => {
+const CardPost: React.FC<CardPostProps> = ({ post, onClick }) => {
     return (
-        <Container>
+        <Container onClick={() => onClick(post.id)}>
             <CardBody>
                 <ImagePost src={post.images[0].location} />
             </CardBody>
