@@ -29,7 +29,7 @@ const Post: React.FC<PostProps> = ({ match }) => {
                 <ContentDescription>{ post?.description }</ContentDescription>
             </Content>
             <Info>
-                <InfoName>Nome: Não informadokkkkkkkkkkkkkk</InfoName>
+                <InfoName>Nome: Não informado</InfoName>
                 <InfoAge>Idade: 46 anos</InfoAge>
                 <InfoCity>Cidade: Não lembra</InfoCity>
             </Info>

@@ -32,10 +32,14 @@ export interface Post {
 interface postProps {
   posts: Post[];
   post?: Post;
+  showRegisterModal: boolean;
+  showLoginModal: boolean;
 }
 
 const initialState: postProps = {
-  posts: []
+  posts: [],
+  showRegisterModal: false,
+  showLoginModal: false
 };
 
 const post = createSlice({
@@ -48,8 +52,14 @@ const post = createSlice({
     updatePost(state, action) {
       state.post = action.payload;
     },
+    toggleRegisterModal(state, action){
+      state.showRegisterModal = action.payload
+    },
+    toggleLoginModal(state, action){
+      state.showLoginModal = action.payload
+    },
   },
 });
 
-export const { updatePosts, updatePost } = post.actions;
+export const { updatePosts, updatePost, toggleLoginModal, toggleRegisterModal } = post.actions;
 export default post.reducer;

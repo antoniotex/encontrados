@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Home from './Home';
 import { isAuthenticated } from '../store/auth/token.service'
 import Post from './Post';
+import Layout from '../layout';
 
 const PrivateRoute = ({ component: Component, route, ...rest }: any) => {
   return (

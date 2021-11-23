@@ -31,6 +31,8 @@ export const ContentUser = styled.p`
 export const Contentmage = styled.img`
     width: 100%;
     margin-bottom: 20px;
+    height: 40rem;
+    object-fit: contain;
 `
 
 export const ContentDescription = styled.p`
