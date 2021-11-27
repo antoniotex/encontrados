@@ -34,7 +34,7 @@ export const Title = styled.Text`
 `
 
 export const Category = styled.Text`
-    font-size: 14px;
+    font-size: 13px;
 `
 
 export const Local = styled.Text`

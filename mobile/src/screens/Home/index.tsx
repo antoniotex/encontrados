@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FlatList, Platform, StatusBar, Text, View } from 'react-native'
+import { FlatList, Platform, StatusBar, View } from 'react-native'
 import Header from '../../components/Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../store/post/post.actions';
@@ -32,7 +32,7 @@ const Home = () => {
         <View style={{ flex: 1, backgroundColor: "#99F3BD" }}>
           <Header />
           <FlatList
-          style={{ paddingTop:10 }}
+            style={{ paddingTop:10 }}
             data={list}
             renderItem={ ({item}) => (
               <Card key={item.id} post={ item } />

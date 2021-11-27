@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -21,11 +21,6 @@ const TabItemCenter = styled.TouchableOpacity`
     border-radius: 30px;
     border: 3px solid #D2F6C5;
     margin-top: -15px;
-`;
-const AvatarIcon = styled.Image`
-    width: 24px;
-    height: 24px;
-    border-radius: 12px;
 `;
 
 interface CustomTabBarProps {
