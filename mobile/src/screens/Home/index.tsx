@@ -32,6 +32,7 @@ const Home = () => {
         <View style={{ flex: 1, backgroundColor: "#99F3BD" }}>
           <Header />
           <FlatList
+          style={{ paddingTop:10 }}
             data={list}
             renderItem={ ({item}) => (
               <Card key={item.id} post={ item } />

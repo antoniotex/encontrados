@@ -6,12 +6,11 @@ export const Container = styled.View`
     padding: 10px;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 10px;
 `
 export const SearchInputWrapper = styled.View`
     background-color: #99F3BD;
-    width: 70%;
-    padding: 5px;
+    flex:1;
+    padding: 8px;
     border-radius: 8px;
 `
 

@@ -12,11 +12,9 @@ const Header = () => {
                     placeholderTextColor="#F6F7D4"
                     // value={value}
                     // onChangeText={onChangeText}
-                    // secureTextEntry={password}
                 />
             </SearchInputWrapper>
-            <Icon name="filter" size={30} color="#fff" />
-            <Icon name="user" size={30} color="#fff" />
+            <Icon style={{ marginHorizontal:10 }} name="filter" size={30} color="#F6F7D4" />
         </Container>
     )
 }
