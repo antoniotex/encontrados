@@ -29,30 +29,31 @@ const AvatarIcon = styled.Image`
 `;
 
 interface CustomTabBarProps {
+    state: any;
     navigation: any
 }
 
-const CustomTabBar: React.FC<CustomTabBarProps> = ({ navigation }) => {
+const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, navigation }) => {
     const goTo = (screenName: string) => {
         navigation.navigate(screenName);
     }
 
     return (
         <TabArea>
-        <TabItem onPress={() => goTo('Home')}>
-            <Icon name="home" size={30} color="#F6F7D4" />
-        </TabItem>
             <TabItem onPress={() => goTo('Home')}>
-                <Icon name="hearto" size={30} color="#F6F7D4" />
+                <Icon style={{opacity: state.index===0 ? 1 : 0.6}} name="home" size={30} color="#F6F7D4" />
             </TabItem>
-            <TabItemCenter onPress={() => goTo('Home')}>
+            <TabItem onPress={() => goTo('Favorites')}>
+                <Icon style={{opacity: state.index===1 ? 1 : 0.6}} name="hearto" size={30} color="#F6F7D4" />
+            </TabItem>
+            <TabItemCenter onPress={() => goTo('AddPost')}>
                 <Icon name="plus" size={32} color="#28DF99" />
             </TabItemCenter>
-            <TabItem onPress={() => goTo('Home')}>
-                <Icon name="user" size={30} color="#F6F7D4" />
+            <TabItem onPress={() => goTo('Profile')}>
+                <Icon style={{opacity: state.index===3 ? 1 : 0.6}} name="user" size={30} color="#F6F7D4" />
             </TabItem>
-            <TabItem onPress={() => goTo('Home')}>
-                <Icon name="setting" size={30} color="#F6F7D4" />
+            <TabItem onPress={() => goTo('Settings')}>
+                <Icon style={{opacity: state.index===4 ? 1 : 0.6}} name="setting" size={30} color="#F6F7D4" />
             </TabItem>
         </TabArea>
     );
