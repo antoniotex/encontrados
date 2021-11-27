@@ -8,6 +8,11 @@ interface Category {
     description: string;
 }
 
+interface User {
+    id: string;
+    name: string;
+}
+
 export interface Post {
     id: string;
     title: string;
@@ -15,4 +20,5 @@ export interface Post {
     images: Image[];
     created_at: Date;
     category: Category;
+    user: User;
 }
