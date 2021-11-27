@@ -3,6 +3,7 @@ import { Post } from '../../models/Post';
 
 interface PostProps {
     list: Post[];
+    post?: Post
 }
 
 const initialState: PostProps = {
@@ -15,9 +16,12 @@ const post = createSlice({
     reducers: {
         updatePosts(state, action){
             state.list = action.payload
+        },
+        updatePost(state, action){
+            state.post = action.payload
         }
     }
 })
 
-export const { updatePosts } = post.actions;
+export const { updatePosts, updatePost } = post.actions;
 export default post.reducer;

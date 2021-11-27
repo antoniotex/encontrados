@@ -1,16 +1,19 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { Post } from '../../models/Post'
 import moment from 'moment'
 import { Category, Container, Local, PostImage, PostImageWrapper, PostInfoWrapper, Title } from './styles'
 
 interface CardAttributes {
-    post: Post
+    post: Post,
+    navigation: any;
 }
 
-const Card: React.FC<CardAttributes> = ({ post }) => {
+const Card: React.FC<CardAttributes> = ({ post, navigation }) => {
     return (
-        <Container>
+        <Container onPress={() => navigation.push('Post', {
+            postId: post.id
+        })}>
             <PostImageWrapper>
                 <PostImage resizeMode={'cover'} source={{ uri: post.images[0].location }} />
             </PostImageWrapper>

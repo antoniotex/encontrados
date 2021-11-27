@@ -10,7 +10,7 @@ import Card from '../../components/Card';
 const STATUS_BAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 const HEADER_HEIGHT = Platform.OS === "ios" ? 20 : 56;
 
-const Home = () => {
+const Home = (props:any) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Home = () => {
             style={{ paddingTop:10 }}
             data={list}
             renderItem={ ({item}) => (
-              <Card key={item.id} post={ item } />
+              <Card key={item.id} post={ item } navigation={props.navigation} />
             ) }
             keyExtractor={ item => item.id }
           />
