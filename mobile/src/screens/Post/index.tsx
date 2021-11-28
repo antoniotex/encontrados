@@ -59,7 +59,6 @@ const Post: React.FC<PostAttrbibutes> = ({ route, navigation }) => {
                     ) }
                     />
                 </View>
-                {/* <TouchableOpacity onPress={() => handleBackButton()}><Text>Voltar</Text></TouchableOpacity> */}
                 <Content>
                     <Title>{ post?.title }</Title>
                     <PostCategory>Categoria: { post?.category.description }</PostCategory>
@@ -67,7 +66,7 @@ const Post: React.FC<PostAttrbibutes> = ({ route, navigation }) => {
                 </Content>
                 <Content>
                     <Title>Descrição</Title>
-                    <Description>{ post?.description }</Description>
+                    <Description>{ post?.description ? post?.description : 'Sem informações adicionais' }</Description>
                 </Content>
                 <Content>
                     <Title>Usuário</Title>
