@@ -12,11 +12,11 @@ export const Container = styled.View`
 export const SearchInputWrapper = styled.View`
   background-color: #99f3bd;
   flex: 1;
-  padding: 8px;
+  padding: 6px;
   border-radius: 8px;
 `;
 
 export const SearchInput = styled.TextInput`
   color: #28df99;
-  font-weight: bold;
+  font-size: 12px;
 `;

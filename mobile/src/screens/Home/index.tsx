@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getPosts} from '../../store/post/post.actions';
 import {RootState} from '../../store';
 import Card from '../../components/Card';
+import CustomAppStatusBar from '../../helpers/AppBar';
 import {Container} from './styles';
 
 const Home = (props: any) => {
@@ -18,17 +19,16 @@ const Home = (props: any) => {
 
   return (
     <Container>
-      <View style={{flex: 1, backgroundColor: '#28df99'}}>
-        <Header />
-        <FlatList
-          style={{paddingTop: 0}}
-          data={list}
-          renderItem={({item}) => (
-            <Card key={item.id} post={item} navigation={props.navigation} />
-          )}
-          keyExtractor={item => item.id}
-        />
-      </View>
+      <CustomAppStatusBar backgroundColor={'#28df99'} barStyle="dark-content" />
+      <Header />
+      <FlatList
+        style={{paddingTop: 0}}
+        data={list}
+        renderItem={({item}) => (
+          <Card key={item.id} post={item} navigation={props.navigation} />
+        )}
+        keyExtractor={item => item.id}
+      />
     </Container>
   );
 };
